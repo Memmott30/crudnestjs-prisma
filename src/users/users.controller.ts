@@ -40,6 +40,12 @@ export class UsersController {
     return new UserEntity(await this.usersService.findOne(id));
   }
 
+  @Get('articules-Uusuarios/:id')
+  @ApiOkResponse({ type: UserEntity })
+  async findAllPostOfUsers(@Param('id', ParseIntPipe) id: number) {
+    return new UserEntity(await this.usersService.findAllPostOfUsers(id));
+  }
+
   @Patch(':id')
   @ApiCreatedResponse({ type: UserEntity })
   async update(

@@ -20,6 +20,21 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { id } });
   }
 
+  findAllPostOfUsers(id: number) {
+    return this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        articles: {
+          select: {
+            title: true,
+            body: true,
+            description: true,
+          },
+        },
+      },
+    });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return this.prisma.user.update({ where: { id }, data: updateUserDto });
   }

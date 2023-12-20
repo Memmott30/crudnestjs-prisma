@@ -1,11 +1,10 @@
-// src/articles/dto/create-article.dto.ts
-
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsInt, // Agrega el import para IsInt
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -33,4 +32,9 @@ export class CreateArticleDto {
   @IsOptional()
   @ApiProperty({ required: false, default: false })
   published?: boolean = false;
+
+  @IsOptional()
+  @IsInt() // Asegúrate de que authorId sea un número entero
+  @ApiProperty({ required: false, type: 'number' })
+  authorId?: number;
 }

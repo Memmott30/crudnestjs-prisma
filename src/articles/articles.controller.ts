@@ -64,4 +64,11 @@ export class ArticlesController {
   async remove(@Param('id', ParseIntPipe) id: number) {
     return new ArticleEntity(await this.articlesService.remove(id));
   }
+
+  @Post('articulo-usuario')
+  @ApiCreatedResponse({ type: ArticleEntity })
+  async createArticle(@Body() createArticleDto: CreateArticleDto) {
+    const result = await this.articlesService.create(createArticleDto);
+    return result;
+  }
 }

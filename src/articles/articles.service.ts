@@ -37,4 +37,15 @@ export class ArticlesService {
   remove(id: number) {
     return this.prisma.article.delete({ where: { id } });
   }
+
+  async createBy(createArticleDto: CreateArticleDto) {
+    const { authorId, ...articleData } = createArticleDto;
+
+    return this.prisma.article.create({
+      data: {
+        ...articleData,
+        author: { connect: { id: authorId } },
+      },
+    });
+  }
 }
